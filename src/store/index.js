@@ -11,16 +11,22 @@ export default new Vuex.Store({
     com_list3: [] 
   },
   mutations: {
-    SETLIST1(state, com_list1){
-      state.com_list1 = com_list1
+    SETLIST(state, com_list){
+      for(var i = 0; i < com_list.length-1; i++){
+        state.com_list1.push( com_list[i] )
+        i++
+        state.com_list2.push( com_list[i] )
+        i++
+        state.com_list3.push( com_list[i] )
+      }
     }
   },
   actions: {
-    GETLIST1(context){
+    GETLIST(context){
       console.log(context)
       // context.commit('SETDAY')
       return axios.get('/com_data.json').then(res =>{
-        context.commit('SETLIST1', res.data)
+        context.commit('SETLIST', res.data)
       })
     }
   },
