@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VuePapaParse from 'vue-papa-parse'
+import store from './store'
 
 
 Vue.config.productionTip = false
@@ -18,5 +19,6 @@ Vue.use(VuePapaParse)
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
