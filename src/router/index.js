@@ -25,6 +25,11 @@ const routes = [
     name: 'Feedback',
     component: () => import( '../components/Feedback.vue')
   },
+  {
+    path: '/companylist',
+    name: 'CompanyList',
+    component: () => import( '../components/CompanyList.vue')
+  },
   // {
   //   path: '/test',
   //   name: 'Test',
