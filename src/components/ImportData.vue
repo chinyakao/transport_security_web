@@ -83,6 +83,8 @@ import Navbar from '@/components/Navbar'
                     }
                 })
             }
+            this.file1 = null
+            this.file2 = null
             alert("上傳成功")
         },
     }
