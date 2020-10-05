@@ -18,7 +18,7 @@
             </div>
             <div class="row my-4">
                 <div class="col-12 txt-align">
-                    <router-link class="login-link" :to="{ name:'login'}">我是從業人員，我要登入</router-link>
+                    <router-link class="login-link" :to="{ name:'Login'}">我是從業人員，我要登入</router-link>
                 </div>
             </div>
         </div>

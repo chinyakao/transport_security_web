@@ -1,0 +1,304 @@
+<template>
+    <div>
+        <b-button v-b-modal.modal-6 class="card-btn" variant="light">
+            <font-awesome-icon class="card-icon" icon="chart-bar" />
+            <div class="card-title">營運管理</div>
+            <div class="container">
+                <div class="row card-subtitle">
+                    <div class="col">分數</div>
+                    <div class="col">排名</div>
+                </div>
+                <div class="row">
+                    <div class="col score-num">{{ score }}
+                    <hr class="score-hr"></div>
+
+                    <div class="col rate-num">{{ rate }}
+                    <hr class="rate-hr"></div>
+
+                </div>
+                <div class="row average-score-total-company">
+                    <div class="col">平均 {{ averageScore }}</div>
+                    <div class="col">{{ totalCompany }}</div>
+                </div>
+            </div>
+
+        </b-button>
+        <b-modal ref="modal-6" id="modal-6" title="" hide-footer hide-header centered>
+            <div class="modal-title">
+                <font-awesome-icon class="modal-icon" icon="chart-bar" />
+                營運管理
+            </div>
+            <div class="modal-rate">
+                排名 
+                <span class="modal-rate-num">{{ rate }}</span> 
+                /{{ totalCompany }}
+            </div>
+            <div class="modal-score">
+                <span class="modal-score-num">{{ score }}</span>分    
+            </div>
+            <b-progress height="1.3rem" class="" :max="max">
+                <b-progress-bar :value="averageScore" variant="success" :precision="1">平均 {{ averageScore }}</b-progress-bar>
+                <b-progress-bar :value="score-averageScore" variant="warning"></b-progress-bar>
+            </b-progress>
+            <hr class="modal-hr">
+            <div class="modal-detail-title">細項分數</div>
+            
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">教育訓練</div>
+                    <div class="col detail-score-num">{{ detail[0] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M1" variant="success" :precision="1">平均 {{ average.M1 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[0]-average.M1" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">駕駛員合適性</div>
+                    <div class="col detail-score-num">{{ detail[1] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M2" variant="success" :precision="1">平均 {{ average.M2 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[1]-average.M2" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">酒測管理</div>
+                    <div class="col detail-score-num">{{ detail[2] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M3" variant="success" :precision="1">平均 {{ average.M3 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[2]-average.M3" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+            
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">保險</div>
+                    <div class="col detail-score-num">{{ detail[3] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M4" variant="success" :precision="1">平均 {{ average.M4 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[3]-average.M4" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+            
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">運輸安全管理規範</div>
+                    <div class="col detail-score-num">{{ detail[4] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M5" variant="success" :precision="1">平均 {{ average.M5 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[4]-average.M5" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+            
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">欠繳費用或交通罰鍰</div>
+                    <div class="col detail-score-num">{{ detail[5] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M6" variant="success" :precision="1">平均 {{ average.M6 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[5]-average.M6" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+            <div class="mb-2">
+                <div class="row">
+                    <div class="col detail-score">其他</div>
+                    <div class="col detail-score-num">{{ detail[6] }}
+                        <span class="detail-score-last">分</span>
+                    </div>
+                </div>
+                <b-progress height="0.75rem" class="" :max="max">
+                    <b-progress-bar :value="average.M7" variant="success" :precision="1">平均 {{ average.M7 }}</b-progress-bar>
+                    <b-progress-bar :value="detail[6]-average.M7" variant="warning"></b-progress-bar>
+                </b-progress>
+            </div>
+
+            <div class="modal-custom-footer">
+                <b-button class="mt-3 close-btn w-25" size="sm" variant="light" @click="hideModal">返回</b-button>
+            </div>
+        </b-modal>
+    </div>
+</template>
+<script>
+export default {
+    props: {
+        detail: Array,
+    },
+    data(){
+        return{
+            // score: 88,
+            rate: 1284,
+            averageScore: 77.6,
+            totalCompany: 3507,
+            max: 100,
+            xgboost_weight: 0.148972821,
+            randomforest_weight: 0.081489623,
+            xgboost: [0.0170031, 0.007300442, 0.027857626, 0.051690981, 0.008023025, 0.033190101, 0.003907546],
+            randomforest: [0.011140709, 0.010561403, 0.011221237, 0.007203279, 0.013203201, 0.015068265, 0.013091529],
+            average:{
+                M1: 78,
+                M2: 75,
+                M3: 74,
+                M4: 86,
+                M5: 78,
+                M6: 75,
+                M7: 73,
+            }
+        }
+    },
+    computed:{
+        score(){
+            var result = 0
+            for(let i=0; i<7; i++){
+                result = result + this.detail[i] * this.xgboost[i]
+            }
+            result = result / this.xgboost_weight
+            return Math.round(result*10)/10
+        },
+        turnBackScore(){
+            var result = 0
+            for(let i=0; i<7; i++){
+                result = result + this.detail[i] * this.xgboost[i]
+            }
+            return result
+        }
+    },
+    methods:{
+        hideModal() {
+            this.$refs['modal-6'].hide()
+        },
+    }
+}
+</script>
+<style scoped>
+.card-btn{
+    border-color: #34DCA2;
+    /* margin: 1rem;*/
+    width: 16rem;
+    /* height: 15rem;  */
+}
+.card-icon{
+    font-size: 4rem;
+    color: #34DCA2;
+}
+.card-title{
+    color: black;
+    font-size: 1rem;
+}
+.card-subtitle{
+    color: darkgray;
+    font-size: 0.75rem;
+}
+.score-num{
+    color: #34DCA2;
+    font-size: 2.5rem;
+}
+.rate-num{
+    color: darkgray;
+    font-size: 2.5rem;
+}
+.score-hr{
+    border: 1px solid darkgray;
+    width: 10%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.rate-hr{
+    border: 1px solid darkgray;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 10%;
+}
+.average-score-total-company{
+    font-size: 0.75rem;
+    color: darkgray;
+}
+.modal{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.modal-title{
+    font-family: 'Noto Sans TC', sans-serif;
+    text-align: center;
+    font-size: 1.3rem;
+}
+.modal-rate{
+    font-family: 'Noto Sans TC', sans-serif;
+    text-align: center;
+    font-size: 0.75rem;
+    color: darkgray;
+}
+.modal-score{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.75rem;
+    color: darkgray;
+    text-align: right;
+}
+.modal-rate-num{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: bold;
+    color: #34DCA2;
+}
+.modal-score-num{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #34DCA2;
+}
+.modal-hr{
+    font-family: 'Noto Sans TC', sans-serif;
+    border: solid 1px lightgray;
+}
+.modal-detail-title{
+    font-family: 'Noto Sans TC', sans-serif;
+    color: darkgray;
+    font-size: 1rem;
+    text-align: center;
+    padding-top: 0;
+    margin-top: 0;
+}
+.detail-score{
+    font-family: 'Noto Sans TC', sans-serif;
+    color: black;
+    text-align: left;
+    font-size: 1rem;
+}
+.detail-score-num{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    color: #34DCA2;
+    text-align: right;
+}
+.detail-score-last{
+    font-size: 0.7rem;
+    color: darkgray;
+}
+.modal-custom-footer{
+    text-align: center;
+}
+.close-btn{
+    font-family: 'Noto Sans TC', sans-serif;
+    color: white;
+    background-color: gray;
+}
+</style>

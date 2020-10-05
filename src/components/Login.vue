@@ -152,6 +152,8 @@ export default {
         if(emailValid){
             if(this.form_login.pwd == userData[userDataIndex].pwd){
                 this.error = ''
+                // this.$store.loginOrNot = true
+                // console.log(this.$store.loginOrNot)
                 alert("登入成功!")
             }else{
                 this.error = '密碼錯誤'

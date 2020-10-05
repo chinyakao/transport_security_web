@@ -15,7 +15,16 @@
                       意見回饋
                   </b-button>
                   <b-button class="recordBtn" href="#" variant="light" size="sm">
+                      <font-awesome-icon icon="pen" />
                       填寫紀錄
+                  </b-button>
+                  <!-- <b-button v-if="loginOrNot" class="recordBtn" href="http://localhost:8080/#/login" variant="light" size="sm">
+                      <font-awesome-icon icon="sign-out-alt" />
+                      登出
+                  </b-button> -->
+                  <b-button class="recordBtn" href="http://localhost:8080/#/login" variant="light" size="sm">
+                      <font-awesome-icon icon="sign-in-alt" />
+                      登入
                   </b-button>
               </b-navbar-nav>
           </b-collapse>
@@ -25,8 +34,6 @@
 <script>
 export default {
     props: ['title'],
-    // data() {
-    // },
 }
 </script>
 
