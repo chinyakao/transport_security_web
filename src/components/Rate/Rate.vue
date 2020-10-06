@@ -27,8 +27,8 @@
         <div class="container">
             <div class="row">
             <div class="col-12">
-                <div class="company-title">{{ companyData[0] }}</div>
-                <div class="company-subtitle">於 {{ selectedYear }} 年 {{ companyType[companyData[1]-1] }} 的安全評量分數</div>
+                <div class="company-title">{{ com_data[0] }}</div>
+                <div class="company-subtitle">於 {{ selectedYear }} 年 {{ companyType[com_data[1]-1] }} 的安全評量分數</div>
             </div>
             </div>
             <div class="row">
@@ -112,10 +112,10 @@ export default {
     },
     data(){
         return{
-            companyTitle: '台灣日通日電物流股份有限公司',
+            // companyTitle: '台灣日通日電物流股份有限公司',
             selectedYear: '2020',
             companyType: ["汽車貨運業", "汽車貨櫃貨運業", "汽車路線貨運業", "客運業"],
-            companyData: ["Company  1275","1","9","100","100","100","100","100","100","100","89","100","91","88","90","92","70","91","92","91","90","91","89","91","92","89","92","90","91","89","89","100","92","85","91"],
+            // com_data: ["Company  1275","1","9","100","100","100","100","100","100","100","89","100","91","88","90","92","70","91","92","91","90","91","89","91","92","89","92","90","91","89","89","100","92","85","91"],
             be_big_weight: [0.487175098, 0.398692364, 0.410719892, 0.492164604, 0.395154658, 0.329578916],
             be_weight: [
                 [0.020644938, 0.20093747, 0.067703738, 0.020696064, 0.0765704, 0.0812616, 0.019360888],
@@ -172,24 +172,30 @@ export default {
             ],
         }
     },
+    mounted(){
+      this.$store.dispatch('GETCOMPANYDATA')
+    },
     methods: {
     },
     computed: {
+      com_data(){
+        return this.$store.state.com_data
+      },
       be_detail(){
         var res = []
-        res.push(this.companyData[3]) 
-        res.push(this.companyData[4]) 
-        res.push(this.companyData[5]) 
-        res.push(this.companyData[6]) 
-        res.push(this.companyData[7]) 
-        res.push(this.companyData[8]) 
-        res.push(this.companyData[9]) 
+        res.push(this.com_data[3]) 
+        res.push(this.com_data[4]) 
+        res.push(this.com_data[5]) 
+        res.push(this.com_data[6]) 
+        res.push(this.com_data[7]) 
+        res.push(this.com_data[8]) 
+        res.push(this.com_data[9]) 
         return res
       },
       be_score(){
             var result = 0
-            let weight = this.be_weight[this.companyData[1]-1]
-            let big_weight = this.be_big_weight[this.companyData[1]-1]
+            let weight = this.be_weight[this.com_data[1]-1]
+            let big_weight = this.be_big_weight[this.com_data[1]-1]
             for(let i=0; i<7; i++){
                 result = result + this.be_detail[i] * weight[i]
             }
@@ -198,14 +204,14 @@ export default {
       },
       hi_detail(){
         var res = []
-        res.push(this.companyData[10]) 
-        res.push(this.companyData[11]) 
+        res.push(this.com_data[10]) 
+        res.push(this.com_data[11]) 
         return res
       },
       hi_score(){
             var result = 0
-            let weight = this.hi_weight[this.companyData[1]-1]
-            let big_weight = this.hi_big_weight[this.companyData[1]-1]
+            let weight = this.hi_weight[this.com_data[1]-1]
+            let big_weight = this.hi_big_weight[this.com_data[1]-1]
             for(let i=0; i<2; i++){
                 result = result + this.hi_detail[i] * weight[i]
             }
@@ -214,17 +220,17 @@ export default {
       },
       ve_detail(){
         var res = []
-        res.push(this.companyData[12]) 
-        res.push(this.companyData[13]) 
-        res.push(this.companyData[14]) 
-        res.push(this.companyData[15]) 
-        res.push(this.companyData[16]) 
+        res.push(this.com_data[12]) 
+        res.push(this.com_data[13]) 
+        res.push(this.com_data[14]) 
+        res.push(this.com_data[15]) 
+        res.push(this.com_data[16]) 
         return res
       },
       ve_score(){
             var result = 0
-            let weight = this.ve_weight[this.companyData[1]-1]
-            let big_weight = this.ve_big_weight[this.companyData[1]-1]
+            let weight = this.ve_weight[this.com_data[1]-1]
+            let big_weight = this.ve_big_weight[this.com_data[1]-1]
             for(let i=0; i<5; i++){
                 result = result + this.ve_detail[i] * weight[i]
             }
@@ -233,16 +239,16 @@ export default {
       },
       la_detail(){
         var res = []
-        res.push(this.companyData[17]) 
-        res.push(this.companyData[18]) 
-        res.push(this.companyData[19]) 
-        res.push(this.companyData[20]) 
+        res.push(this.com_data[17]) 
+        res.push(this.com_data[18]) 
+        res.push(this.com_data[19]) 
+        res.push(this.com_data[20]) 
         return res
       },
       la_score(){
             var result = 0
-            let weight = this.la_weight[this.companyData[1]-1]
-            let big_weight = this.la_big_weight[this.companyData[1]-1]
+            let weight = this.la_weight[this.com_data[1]-1]
+            let big_weight = this.la_big_weight[this.com_data[1]-1]
             for(let i=0; i<4; i++){
                 result = result + this.la_detail[i] * weight[i]
             }
@@ -251,20 +257,20 @@ export default {
       },
       su_detail(){
         var res = []
-        res.push(this.companyData[21]) 
-        res.push(this.companyData[22]) 
-        res.push(this.companyData[23]) 
-        res.push(this.companyData[24]) 
-        res.push(this.companyData[25]) 
-        res.push(this.companyData[26]) 
-        res.push(this.companyData[27]) 
-        res.push(this.companyData[1])
+        res.push(this.com_data[21]) 
+        res.push(this.com_data[22]) 
+        res.push(this.com_data[23]) 
+        res.push(this.com_data[24]) 
+        res.push(this.com_data[25]) 
+        res.push(this.com_data[26]) 
+        res.push(this.com_data[27]) 
+        res.push(this.com_data[1])
         return res
       },
       su_score(){
             var result = 0
-            let weight = this.su_weight[this.companyData[1]-1]
-            let big_weight = this.su_big_weight[this.companyData[1]-1]
+            let weight = this.su_weight[this.com_data[1]-1]
+            let big_weight = this.su_big_weight[this.com_data[1]-1]
             for(let i=0; i<7; i++){
                 result = result + this.su_detail[i] * weight[i]
             }
@@ -273,20 +279,20 @@ export default {
       },
       ma_detail(){
         var res = []
-        res.push(this.companyData[28]) 
-        res.push(this.companyData[29]) 
-        res.push(this.companyData[30]) 
-        res.push(this.companyData[31]) 
-        res.push(this.companyData[32]) 
-        res.push(this.companyData[33]) 
-        res.push(this.companyData[34]) 
-        res.push(this.companyData[1])
+        res.push(this.com_data[28]) 
+        res.push(this.com_data[29]) 
+        res.push(this.com_data[30]) 
+        res.push(this.com_data[31]) 
+        res.push(this.com_data[32]) 
+        res.push(this.com_data[33]) 
+        res.push(this.com_data[34]) 
+        res.push(this.com_data[1])
         return res
       },
       ma_score(){
             var result = 0
-            let weight = this.ma_weight[this.companyData[1]-1]
-            let big_weight = this.ma_big_weight[this.companyData[1]-1]
+            let weight = this.ma_weight[this.com_data[1]-1]
+            let big_weight = this.ma_big_weight[this.com_data[1]-1]
             for(let i=0; i<7; i++){
                 result = result + this.ma_detail[i] * weight[i]
             }
@@ -294,13 +300,12 @@ export default {
             return Math.round(result*10)/10
       },
       total_score(){
-        let result = this.be_score*this.be_big_weight[this.companyData[1]-1]
-        result = result+ this.hi_score*this.hi_big_weight[this.companyData[1]-1]
-        result = result+  this.ve_score*this.ve_big_weight[this.companyData[1]-1]
-        result = result+ this.la_score*this.la_big_weight[this.companyData[1]-1]
-        result = result+ this.su_score*this.su_big_weight[this.companyData[1]-1]
-        result = result+ this.ma_score*this.ma_big_weight[this.companyData[1]-1]
-        console.log(result)
+        let result = this.be_score*this.be_big_weight[this.com_data[1]-1]
+        result = result+ this.hi_score*this.hi_big_weight[this.com_data[1]-1]
+        result = result+  this.ve_score*this.ve_big_weight[this.com_data[1]-1]
+        result = result+ this.la_score*this.la_big_weight[this.com_data[1]-1]
+        result = result+ this.su_score*this.su_big_weight[this.com_data[1]-1]
+        result = result+ this.ma_score*this.ma_big_weight[this.com_data[1]-1]
         return Math.round(result*10)/10
       }
     }

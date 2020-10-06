@@ -8,7 +8,8 @@ export default new Vuex.Store({
     loginOrNot: false,
     com_list1: [],
     com_list2: [],
-    com_list3: [] 
+    com_list3: [],
+    com_data: [],
   },
   mutations: {
     SETLIST(state, com_list){
@@ -19,7 +20,12 @@ export default new Vuex.Store({
         i++
         state.com_list3.push( com_list[i] )
       }
-    }
+    },
+    SETCOMPANYDATA(state, com_data){
+      console.log(com_data)
+      state.com_data = com_data[1]
+      console.log(state.com_data)
+    },
   },
   actions: {
     GETLIST(context){
@@ -27,6 +33,13 @@ export default new Vuex.Store({
       // context.commit('SETDAY')
       return axios.get('/com_data.json').then(res =>{
         context.commit('SETLIST', res.data)
+      })
+    },
+    GETCOMPANYDATA(context){
+      console.log(context)
+      // context.commit('SETDAY')
+      return axios.get('/com_data.json').then(res =>{
+        context.commit('SETCOMPANYDATA', res.data)
       })
     }
   },
