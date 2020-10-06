@@ -143,18 +143,14 @@
 export default {
     props:{
         detail: Array,
+        score: Number,
     },
     data(){
         return{
-            // score: 80.1,
             rate: 1284,
             averageScore: 77.6,
             totalCompany: 3507,
             max: 100,
-            xgboost_weight: 0.120596268,
-            randomforest_weight: 0.07950642,
-            xgboost: [0.01314014, 0.009757399, 0.031581037, 0.011056025, 0.028059894, 0.009937909, 0.017063865],
-            randomforest: [0.011354562, 0.012553623, 0.011654442, 0.011119441, 0.011839373, 0.009474128, 0.01151085],
             average:{
                 G1: 78,
                 G2: 75,
@@ -164,23 +160,6 @@ export default {
                 G6: 75,
                 G7: 73,
             }
-        }
-    },
-    computed:{
-        score(){
-            var result = 0
-            for(let i=0; i<7; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            result = result / this.xgboost_weight
-            return Math.round(result*10)/10
-        },
-        turnBackScore(){
-            var result = 0
-            for(let i=0; i<7; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            return result
         }
     },
     methods:{
@@ -195,6 +174,7 @@ export default {
     border-color: #34DCA2;
     /* margin: 1rem;*/
     width: 16rem;
+    border-radius: 1.5rem;
     /* height: 15rem;  */
 }
 .card-icon{

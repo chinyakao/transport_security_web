@@ -144,6 +144,7 @@
 export default {
     props: {
         detail: Array,
+        score: Number,
     },
     data(){
         return{
@@ -151,10 +152,7 @@ export default {
             averageScore: 77.6,
             totalCompany: 3507,
             max: 100,
-            xgboost_weight: 0.470975658,
-            randomforest_weight: 0.564851544,
-            xgboost: [0, 0.351334214, 0.056719903, 0.033643819, 0, 0, 0.029277721],
-            randomforest: [0.001715945, 0.364908295, 0.162033714, 0.030174278, 0, 0, 0.006019312],
+            
             average:{
                 B1: 78,
                 B2: 75,
@@ -166,16 +164,18 @@ export default {
             }
         }
     },
-    computed:{
-        score(){
-            var result = 0
-            for(let i=0; i<7; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            result = result / this.xgboost_weight
-            return Math.round(result*10)/10
-        },
-    },
+    // computed:{
+    //     score(){
+    //         var result = 0
+    //         let weight = this.weight[this.detail[7]-1]
+    //         let big_weight = this.big_weight[this.detail[7]-1]
+    //         for(let i=0; i<7; i++){
+    //             result = result + this.detail[i] * weight[i]
+    //         }
+    //         result = result / big_weight
+    //         return Math.round(result*10)/10
+    //     },
+    // },
     methods:{
         hideModal() {
             this.$refs['modal-1'].hide()
@@ -189,6 +189,7 @@ export default {
     /* margin: 1rem;*/
     width: 16rem;
     /* height: 15rem;  */
+    border-radius: 1.5rem;
 }
 .card-icon{
     font-size: 4rem;

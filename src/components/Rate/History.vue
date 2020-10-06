@@ -79,42 +79,32 @@
 export default {
     props:{
         detail: Array,
+        score: Number,
     },
     data(){
         return{
-            // score: 88,
             rate: 1284,
             averageScore: 77.6,
             totalCompany: 3507,
             max: 100,
-            xgboost_weight: 0.082513923,
-            randomforest_weight: 0.16237923,
-            xgboost: [0.01597424, 0.066539682],
-            randomforest: [0.010944417, 0.151434813],
-            average:{
+            average: {
                 H1: 78,
                 H2: 75,
             }
         }
     },
-    computed:{
-        score(){
-            var result = 0
-            for(let i=0; i<2; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            result = result / this.xgboost_weight
-            
-            return Math.round(result*10)/10
-        },
-        turnBackScore(){
-            var result = 0
-            for(let i=0; i<2; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            return result
-        }
-    },
+    // computed:{
+    //     score(){
+    //         var result = 0
+    //         let weight = this.weight[this.detail[2]-1]
+    //         let big_weight = this.big_weight[this.detail[2]-1]
+    //         for(let i=0; i<2; i++){
+    //             result = result + this.detail[i] * weight[i]
+    //         }
+    //         result = result / big_weight
+    //         return Math.round(result*10)/10
+    //     },
+    // },
     methods:{
         hideModal() {
             this.$refs['modal-2'].hide()
@@ -128,6 +118,7 @@ export default {
     border-color: #FF5858;
     /* margin: 1rem;*/
     width: 16rem;
+    border-radius: 1.5rem;
     /* height: 15rem;  */
 }
 .card-icon{

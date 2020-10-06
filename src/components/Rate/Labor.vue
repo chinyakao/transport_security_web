@@ -106,40 +106,20 @@
 export default {
     props:{
         detail: Array,
+        score: Number
     },
     data(){
         return{
-            // score: 80.1,
             rate: 1284,
             averageScore: 77.6,
             totalCompany: 3507,
             max: 100,
-            xgboost_weight: 0.0619696,
-            randomforest_weight: 0.044926531,
-            xgboost: [0.007575965, 0.018857526, 0.022241347, 0.013294762],
-            randomforest: [0.010839539, 0.010386106, 0.010812374, 0.012888512],
             average:{
                 O1: 78,
                 O2: 75,
                 O3: 74,
                 O4: 86,
             }
-        }
-    },computed:{
-        score(){
-            var result = 0
-            for(let i=0; i<4; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            result = result / this.xgboost_weight
-            return Math.round(result*10)/10
-        },
-        turnBackScore(){
-            var result = 0
-            for(let i=0; i<4; i++){
-                result = result + this.detail[i] * this.xgboost[i]
-            }
-            return result
         }
     },
     methods:{
@@ -154,6 +134,7 @@ export default {
     border-color: #34DCA2;
     /* margin: 1rem;*/
     width: 16rem;
+    border-radius: 1.5rem;
     /* height: 15rem;  */
 }
 .card-icon{

@@ -118,10 +118,10 @@
 export default {
     props:{
         detail:Array,
+        score: Number,
     },
     data(){
         return{
-            score: 88,
             rate: 1284,
             averageScore: 77.6,
             totalCompany: 3507,
@@ -147,6 +147,7 @@ export default {
     border-color: #34DCA2;
     /* margin: 1rem;*/
     width: 16rem;
+    border-radius: 1.5rem;
     /* height: 15rem;  */
 }
 .card-icon{

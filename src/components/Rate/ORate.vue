@@ -6,33 +6,33 @@
         <hr class="rate-hr">
         <div class="container rate-table">
             <div class="row">
-            <div class="col" >優</div>
-            <div class="col" >甲</div>
-            <div class="col" >乙</div>
-            <div class="col" >丙</div>
+            <div class="col" >優  </div>
+            <div class="col" >甲  </div>
+            <div class="col" >乙  </div>
+            <div class="col" >丙  </div>
             <div class="col" >fail</div>
             </div>
             <div class="row">
-            <div class="col" >100</div>
-            <div class="col" >89</div>
-            <div class="col" >79</div>
-            <div class="col" >69</div>
-            <div class="col" >59</div>
+            <div class="col" >100~</div>
+            <div class="col" >89~</div>
+            <div class="col" >79~</div>
+            <div class="col" >69~</div>
+            <div class="col" >59~</div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
             <div class="col" >|</div>
             <div class="col" >|</div>
             <div class="col" >|</div>
             <div class="col" >|</div>
             <div class="col" >|</div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
             <div class="col" >90</div>
             <div class="col" >80</div>
             <div class="col" >70</div>
             <div class="col" >60</div>
             <div class="col" >0</div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- <b-card-group deck class="">
