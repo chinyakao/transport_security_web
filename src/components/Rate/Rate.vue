@@ -28,7 +28,7 @@
             <div class="row">
             <div class="col-12">
                 <div class="company-title">{{ com_data[0] }}</div>
-                <div class="company-subtitle">於 {{ selectedYear }} 年 {{ companyType[com_data[1]-1] }} 的安全評量分數</div>
+                <div class="company-subtitle">於 {{ selectedYear }} 年 {{ com_type[com_data[1]-1] }} 的安全評量分數</div>
             </div>
             </div>
             <div class="row">
@@ -37,7 +37,7 @@
                 <OScore :score="total_score"></OScore>
             </div>
             <div class="col">
-                <ORate />
+                <ORate></ORate>
             </div>
             <div class="col"></div>
             </div>
@@ -114,7 +114,7 @@ export default {
         return{
             // companyTitle: '台灣日通日電物流股份有限公司',
             selectedYear: '2020',
-            companyType: ["汽車貨運業", "汽車貨櫃貨運業", "汽車路線貨運業", "客運業"],
+            com_type: ["汽車貨運業", "汽車貨櫃貨運業", "汽車路線貨運業", "客運業"],
             // com_data: ["Company  1275","1","9","100","100","100","100","100","100","100","89","100","91","88","90","92","70","91","92","91","90","91","89","91","92","89","92","90","91","89","89","100","92","85","91"],
             be_big_weight: [0.487175098, 0.398692364, 0.410719892, 0.492164604, 0.395154658, 0.329578916],
             be_weight: [
@@ -194,12 +194,14 @@ export default {
       },
       be_score(){
             var result = 0
-            let weight = this.be_weight[this.com_data[1]-1]
-            let big_weight = this.be_big_weight[this.com_data[1]-1]
-            for(let i=0; i<7; i++){
-                result = result + this.be_detail[i] * weight[i]
+            if(this.com_data.length > 0){
+              let weight = this.be_weight[this.com_data[1]-1]
+              let big_weight = this.be_big_weight[this.com_data[1]-1]
+              for(let i=0; i<7; i++){
+                  result = result + this.be_detail[i] * weight[i]
+              }
+              result = result / big_weight
             }
-            result = result / big_weight
             return Math.round(result*10)/10
       },
       hi_detail(){
@@ -210,12 +212,14 @@ export default {
       },
       hi_score(){
             var result = 0
-            let weight = this.hi_weight[this.com_data[1]-1]
-            let big_weight = this.hi_big_weight[this.com_data[1]-1]
-            for(let i=0; i<2; i++){
-                result = result + this.hi_detail[i] * weight[i]
+            if(this.com_data.length > 0){
+              let weight = this.hi_weight[this.com_data[1]-1]
+              let big_weight = this.hi_big_weight[this.com_data[1]-1]
+              for(let i=0; i<2; i++){
+                  result = result + this.hi_detail[i] * weight[i]
+              }
+              result = result / big_weight
             }
-            result = result / big_weight
             return Math.round(result*10)/10
       },
       ve_detail(){
@@ -229,12 +233,14 @@ export default {
       },
       ve_score(){
             var result = 0
-            let weight = this.ve_weight[this.com_data[1]-1]
-            let big_weight = this.ve_big_weight[this.com_data[1]-1]
-            for(let i=0; i<5; i++){
-                result = result + this.ve_detail[i] * weight[i]
+            if(this.com_data.length > 0){
+              let weight = this.ve_weight[this.com_data[1]-1]
+              let big_weight = this.ve_big_weight[this.com_data[1]-1]
+              for(let i=0; i<5; i++){
+                  result = result + this.ve_detail[i] * weight[i]
+              }
+              result = result / big_weight
             }
-            result = result / big_weight
             return Math.round(result*10)/10
       },
       la_detail(){
@@ -247,12 +253,14 @@ export default {
       },
       la_score(){
             var result = 0
-            let weight = this.la_weight[this.com_data[1]-1]
-            let big_weight = this.la_big_weight[this.com_data[1]-1]
-            for(let i=0; i<4; i++){
-                result = result + this.la_detail[i] * weight[i]
+            if(this.com_data.length > 0){
+              let weight = this.la_weight[this.com_data[1]-1]
+              let big_weight = this.la_big_weight[this.com_data[1]-1]
+              for(let i=0; i<4; i++){
+                  result = result + this.la_detail[i] * weight[i]
+              }
+              result = result / big_weight
             }
-            result = result / big_weight
             return Math.round(result*10)/10
       },
       su_detail(){
@@ -269,12 +277,14 @@ export default {
       },
       su_score(){
             var result = 0
-            let weight = this.su_weight[this.com_data[1]-1]
-            let big_weight = this.su_big_weight[this.com_data[1]-1]
-            for(let i=0; i<7; i++){
-                result = result + this.su_detail[i] * weight[i]
+            if(this.com_data.length > 0){
+              let weight = this.su_weight[this.com_data[1]-1]
+              let big_weight = this.su_big_weight[this.com_data[1]-1]
+              for(let i=0; i<7; i++){
+                  result = result + this.su_detail[i] * weight[i]
+              }
+              result = result / big_weight
             }
-            result = result / big_weight
             return Math.round(result*10)/10
       },
       ma_detail(){
@@ -291,12 +301,14 @@ export default {
       },
       ma_score(){
             var result = 0
-            let weight = this.ma_weight[this.com_data[1]-1]
-            let big_weight = this.ma_big_weight[this.com_data[1]-1]
-            for(let i=0; i<7; i++){
-                result = result + this.ma_detail[i] * weight[i]
+            if(this.com_data.length > 0){
+              let weight = this.ma_weight[this.com_data[1]-1]
+              let big_weight = this.ma_big_weight[this.com_data[1]-1]
+              for(let i=0; i<7; i++){
+                  result = result + this.ma_detail[i] * weight[i]
+              }
+              result = result / big_weight
             }
-            result = result / big_weight
             return Math.round(result*10)/10
       },
       total_score(){

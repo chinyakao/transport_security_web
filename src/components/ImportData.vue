@@ -57,9 +57,40 @@ import Navbar from '@/components/Navbar'
       return {
         file1: null,
         file2: null,
+        // com_data_list: [],
+        // com_data: [],
+        // be_detail: [],
+        // be_score: 0,
+        
       }
     },
     methods: {
+        to_com_data() {
+          this.com_data = this.com_data_list[4]
+        },
+        to_be_detail(){
+          var res = []
+          res.push(this.com_data[3]) 
+          res.push(this.com_data[4]) 
+          res.push(this.com_data[5]) 
+          res.push(this.com_data[6]) 
+          res.push(this.com_data[7]) 
+          res.push(this.com_data[8]) 
+          res.push(this.com_data[9]) 
+          return res
+        },
+        to_be_score(){
+              var result = 0
+              if(this.com_data.length > 0){
+                let weight = this.be_weight[this.com_data[1]-1]
+                let big_weight = this.be_big_weight[this.com_data[1]-1]
+                for(let i=0; i<7; i++){
+                    result = result + this.be_detail[i] * weight[i]
+                }
+                result = result / big_weight
+              }
+              return Math.round(result*10)/10
+        },
         tirggerFile1 (event) {
             this.file1 = event.target.files[0]
             // console.log(this.file1)
@@ -72,14 +103,43 @@ import Navbar from '@/components/Navbar'
             if(this.file1 !== null){
                 this.$papa.parse(this.file1, {
                     complete: function(res){
-                        console.log("Finish1:", res.data)
+                        let com_data_list = res.data
+                        let com_data = com_data_list[4]
+                        var be_detail = []
+                        be_detail.push(com_data[3]) 
+                        be_detail.push(com_data[4]) 
+                        be_detail.push(com_data[5]) 
+                        be_detail.push(com_data[6]) 
+                        be_detail.push(com_data[7]) 
+                        be_detail.push(com_data[8]) 
+                        be_detail.push(com_data[9]) 
+                        var result = 0
+                        let be_big_weight= [0.487175098, 0.398692364, 0.410719892, 0.492164604, 0.395154658, 0.329578916]
+                        let be_weight= [
+                            [0.020644938, 0.20093747, 0.067703738, 0.020696064, 0.0765704, 0.0812616, 0.019360888],
+                            [0.01909573, 0.1436127, 0.048231084, 0.024776024, 0.0640504, 0.0646664, 0.034260026],
+                            [0.06737844, 0.15878678, 0.0390792, 0.049764272, 0.0428432, 0.0296792, 0.0231888],
+                            [0.011691472, 0.186319338, 0.103418554, 0.020418414, 0.0765704, 0.0812616, 0.012484826],
+                            [0.012389248, 0.138099938, 0.073302846, 0.027744068, 0.0640504, 0.0646664, 0.014901758],
+                            [0.05460431, 0.07621334, 0.070678922, 0.030514742, 0.0428432, 0.0296792, 0.025045202],
+                        ]
+                        if(com_data.length > 0){
+                          let weight = be_weight[com_data[1]-1]
+                          let big_weight = be_big_weight[com_data[1]-1]
+                          for(let i=0; i<7; i++){
+                              result = result + be_detail[i] * weight[i]
+                          }
+                          result = result / big_weight
+                        }
+                        let be_score = Math.round(result*10)/10
+                        console.log(be_score)
                     }
                 })
             }
             if(this.file2 !== null){
                 this.$papa.parse(this.file2, {
                     complete: function(res){
-                        console.log("Finish2:", res.data)
+                        this.com_data_list = res.data
                     }
                 })
             }

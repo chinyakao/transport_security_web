@@ -12,7 +12,7 @@
             <div class="row my-4">
                 <div class="col-12 txt-align">
                     <b-button class="enter-btn" variant="light">
-                        <div class="">查詢分數</div>
+                        <div class="" @click="toRate">查詢分數</div>
                     </b-button>
                 </div>
             </div>
@@ -38,6 +38,11 @@ export default {
             backgroundImage: 'url(' + require('@/assets/L_homebg_user.png') + ')'
         }
     }
+  },
+  methods: {
+      toRate(){
+         this.$router.push({ path: 'companylist' })
+      },
   }
 }
 </script>

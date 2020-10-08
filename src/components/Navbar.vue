@@ -1,7 +1,7 @@
 <template>
   <div>
       <b-navbar class="fixed-top backgroudcolor" toggleable="lg" type="light" variant="">
-          <b-navbar-brand href="http://localhost:8080/">
+          <b-navbar-brand @click="toHome">
             <font-awesome-icon class="brand-icon" icon="truck" />
             運輸安全評量平台
           </b-navbar-brand>
@@ -22,7 +22,7 @@
                       <font-awesome-icon icon="sign-out-alt" />
                       登出
                   </b-button> -->
-                  <b-button class="recordBtn" href="http://localhost:8080/#/login" variant="light" size="sm">
+                  <b-button class="recordBtn" @click="toLogin" variant="light" size="sm">
                       <font-awesome-icon icon="sign-in-alt" />
                       登入
                   </b-button>
@@ -34,6 +34,19 @@
 <script>
 export default {
     props: ['title'],
+    methods: {
+        toLogin(){
+            let path =`/login`
+            if (this.$route.path !== path) this.$router.push(path)
+            // if (this.route.path !== path) this.$route.push(path)
+      },
+    //   要定義一下login後的page
+        toHome(){
+            // console.log(this.$route)
+            let path = `/`
+            if (this.$route.path !== path) this.$router.push(path)
+        }
+    }
 }
 </script>
 

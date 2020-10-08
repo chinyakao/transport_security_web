@@ -22,23 +22,21 @@ export default new Vuex.Store({
       }
     },
     SETCOMPANYDATA(state, com_data){
-      console.log(com_data)
       state.com_data = com_data[1]
-      console.log(state.com_data)
     },
   },
   actions: {
     GETLIST(context){
-      console.log(context)
+      // console.log(context)
       // context.commit('SETDAY')
-      return axios.get('/com_data.json').then(res =>{
+      return axios.get('/com_org_data.json').then(res =>{
         context.commit('SETLIST', res.data)
       })
     },
     GETCOMPANYDATA(context){
-      console.log(context)
+      // console.log(context)
       // context.commit('SETDAY')
-      return axios.get('/com_data.json').then(res =>{
+      return axios.get('/com_org_data.json').then(res =>{
         context.commit('SETCOMPANYDATA', res.data)
       })
     }
