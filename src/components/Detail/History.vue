@@ -113,6 +113,11 @@ export default {
 }
 </script>
 <style scoped>
+.btn{
+    border-radius: 1.5rem;
+    border-color: transparent;
+    background-color: transparent;
+}
 .card-btn{
     /* border-color: #34DCA2; */
     border-color: #FF5858;
