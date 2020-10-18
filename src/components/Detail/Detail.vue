@@ -5,14 +5,21 @@
         <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
     
         <b-collapse id="nav-collapse" is-nav>            
-            <span class="abs-center-x">
-            <b-button href="#" variant="light" size="sm" class="randomforest-btn">
+          <span class="abs-center-x">
+            <b-button v-if="!xg_or_not" variant="light" size="sm" class="select-algo-btn">
                 Random Forest
             </b-button>
-            <b-button href="#" variant="light" size="sm" class="xgboost-btn">
+            <b-button @click="toRa" v-else variant="light" size="sm" class="unselect-algo-btn">
+                Random Forest
+            </b-button>
+            
+            <b-button v-if="xg_or_not" variant="light" size="sm" class="select-algo-btn">
                 XGBoost
             </b-button>
-            </span>
+            <b-button @click="toXg" v-else variant="light" size="sm" class="unselect-algo-btn">
+                XGBoost
+            </b-button>
+          </span>
 
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
@@ -112,10 +119,9 @@ export default {
     },
     data(){
         return{
-            // companyTitle: '台灣日通日電物流股份有限公司',
+            xg_or_not: true,
             selectedYear: '2020',
             com_type: ["汽車貨運業", "汽車貨櫃貨運業", "汽車路線貨運業", "客運業"],
-            // com_data: ["Company  1275","1","9","100","100","100","100","100","100","100","89","100","91","88","90","92","70","91","92","91","90","91","89","91","92","89","92","90","91","89","89","100","92","85","91"],
             be_big_weight: [0.487175098, 0.398692364, 0.410719892, 0.492164604, 0.395154658, 0.329578916],
             be_weight: [
                 [0.020644938, 0.20093747, 0.067703738, 0.020696064, 0.0765704, 0.0812616, 0.019360888],
@@ -176,10 +182,24 @@ export default {
       this.$store.dispatch('GETCOMPANYDATA')
     },
     methods: {
+      toXg(){
+        this.xg_or_not = true
+      },
+      toRa(){
+        this.xg_or_not = false
+      }
     },
     computed: {
       com_data(){
         return this.$store.state.com_data
+      },
+      select_algo(){
+        if(this.xg_or_not){
+          return this.com_data[1]-1
+        }else{
+          console.log(parseInt(this.com_data[1])+2)
+          return parseInt(this.com_data[1])+2
+        }
       },
       be_detail(){
         var res = []
@@ -195,8 +215,8 @@ export default {
       be_score(){
             var result = 0
             if(this.com_data.length > 0){
-              let weight = this.be_weight[this.com_data[1]-1]
-              let big_weight = this.be_big_weight[this.com_data[1]-1]
+              let weight = this.be_weight[this.select_algo]
+              let big_weight = this.be_big_weight[this.select_algo]
               for(let i=0; i<7; i++){
                   result = result + this.be_detail[i] * weight[i]
               }
@@ -213,8 +233,8 @@ export default {
       hi_score(){
             var result = 0
             if(this.com_data.length > 0){
-              let weight = this.hi_weight[this.com_data[1]-1]
-              let big_weight = this.hi_big_weight[this.com_data[1]-1]
+              let weight = this.hi_weight[this.select_algo]
+              let big_weight = this.hi_big_weight[this.select_algo]
               for(let i=0; i<2; i++){
                   result = result + this.hi_detail[i] * weight[i]
               }
@@ -234,8 +254,8 @@ export default {
       ve_score(){
             var result = 0
             if(this.com_data.length > 0){
-              let weight = this.ve_weight[this.com_data[1]-1]
-              let big_weight = this.ve_big_weight[this.com_data[1]-1]
+              let weight = this.ve_weight[this.select_algo]
+              let big_weight = this.ve_big_weight[this.select_algo]
               for(let i=0; i<5; i++){
                   result = result + this.ve_detail[i] * weight[i]
               }
@@ -254,8 +274,8 @@ export default {
       la_score(){
             var result = 0
             if(this.com_data.length > 0){
-              let weight = this.la_weight[this.com_data[1]-1]
-              let big_weight = this.la_big_weight[this.com_data[1]-1]
+              let weight = this.la_weight[this.select_algo]
+              let big_weight = this.la_big_weight[this.select_algo]
               for(let i=0; i<4; i++){
                   result = result + this.la_detail[i] * weight[i]
               }
@@ -278,8 +298,8 @@ export default {
       su_score(){
             var result = 0
             if(this.com_data.length > 0){
-              let weight = this.su_weight[this.com_data[1]-1]
-              let big_weight = this.su_big_weight[this.com_data[1]-1]
+              let weight = this.su_weight[this.select_algo]
+              let big_weight = this.su_big_weight[this.select_algo]
               for(let i=0; i<7; i++){
                   result = result + this.su_detail[i] * weight[i]
               }
@@ -302,8 +322,8 @@ export default {
       ma_score(){
             var result = 0
             if(this.com_data.length > 0){
-              let weight = this.ma_weight[this.com_data[1]-1]
-              let big_weight = this.ma_big_weight[this.com_data[1]-1]
+              let weight = this.ma_weight[this.select_algo]
+              let big_weight = this.ma_big_weight[this.select_algo]
               for(let i=0; i<7; i++){
                   result = result + this.ma_detail[i] * weight[i]
               }
@@ -312,12 +332,12 @@ export default {
             return Math.round(result*10)/10
       },
       total_score(){
-        let result = this.be_score*this.be_big_weight[this.com_data[1]-1]
-        result = result+ this.hi_score*this.hi_big_weight[this.com_data[1]-1]
-        result = result+  this.ve_score*this.ve_big_weight[this.com_data[1]-1]
-        result = result+ this.la_score*this.la_big_weight[this.com_data[1]-1]
-        result = result+ this.su_score*this.su_big_weight[this.com_data[1]-1]
-        result = result+ this.ma_score*this.ma_big_weight[this.com_data[1]-1]
+        let result = this.be_score*this.be_big_weight[this.select_algo]
+        result = result+ this.hi_score*this.hi_big_weight[this.select_algo]
+        result = result+  this.ve_score*this.ve_big_weight[this.select_algo]
+        result = result+ this.la_score*this.la_big_weight[this.select_algo]
+        result = result+ this.su_score*this.su_big_weight[this.select_algo]
+        result = result+ this.ma_score*this.ma_big_weight[this.select_algo]
         return Math.round(result*10)/10
       },
       total_rate(){
@@ -361,13 +381,13 @@ export default {
 .back-btn{
   color: white;
 }
-.randomforest-btn{
+.unselect-algo-btn{
   background-color: white;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
-.xgboost-btn{
-  background-color: darkgreen;
+.select-algo-btn{
+  background-color: #01B468;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
 }
