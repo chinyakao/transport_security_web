@@ -74,42 +74,11 @@ import Navbar from '@/components/Navbar'
             // console.log(this.file1)
         },
         upload() {
-            // if(this.file1 !== null){
-            //     this.$papa.parse(this.file1, {
-            //         complete: function(res){
-            //             let com_data_list = res.data
-            //             for(var k=1; k < com_data_list.length-2; k++){
-            //               let com_data = com_data_list[k]
-            //               var be_xg_score = 0
-            //               var be_ra_score = 0
-            //               let be_big_weight= [0.487175098, 0.398692364, 0.410719892, 0.492164604, 0.395154658, 0.329578916]
-            //               let be_weight= [
-            //                   [0.020644938, 0.20093747, 0.067703738, 0.020696064, 0.0765704, 0.0812616, 0.019360888],
-            //                   [0.01909573, 0.1436127, 0.048231084, 0.024776024, 0.0640504, 0.0646664, 0.034260026],
-            //                   [0.06737844, 0.15878678, 0.0390792, 0.049764272, 0.0428432, 0.0296792, 0.0231888],
-            //                   [0.011691472, 0.186319338, 0.103418554, 0.020418414, 0.0765704, 0.0812616, 0.012484826],
-            //                   [0.012389248, 0.138099938, 0.073302846, 0.027744068, 0.0640504, 0.0646664, 0.014901758],
-            //                   [0.05460431, 0.07621334, 0.070678922, 0.030514742, 0.0428432, 0.0296792, 0.025045202],
-            //               ]
-            //               if(com_data.length > 0){
-            //                 var type = parseInt(com_data[1])
-            //                 for(let i=0; i<7; i++){
-            //                     be_xg_score = be_xg_score + com_data[3+i] * be_weight[type-1][i]
-            //                     be_ra_score = be_ra_score + com_data[3+i] * be_weight[type+2][i]
-            //                 }
-            //                 be_xg_score = Math.round((be_xg_score / be_big_weight[type-1])*10)/10
-            //                 be_ra_score = Math.round((be_ra_score / be_big_weight[type+2])*10)/10
-            //                 console.log("xg: " + be_xg_score)
-            //                 console.log("ra: " + be_ra_score)
-            //               }
-            //             }
-            //         }
-            //     })
-            // }
             if(this.file1 !== null){
                 this.$papa.parse(this.file1, {
                     complete: function(res){
                         this.com_data_list = res.data
+                        // this.$store.commit('UPDATEDATA', res.data)
                         console.log(this.com_data_list)
                     }
                 })

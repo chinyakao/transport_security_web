@@ -125,8 +125,8 @@ export default {
         },
         validUserData: [
             {email: 'adminadmin@gmail.com', pwd: 'adminadmin'},
-            {email: 'rileykao@gmail.com', pwd: '1234567890'},
-            {email: 'thetestemail@gmail.com', pwd: 'testemail'},
+            {email: 'company368@gmail.com', pwd: '1234567890'},
+            {email: 'company73@gmail.com', pwd: 'testemail'},
         ],
         error: '',
 
@@ -142,9 +142,11 @@ export default {
         let userData = this.validUserData
         let emailValid = false
         let userDataIndex = -1
+        var loginID = ''
         for(var i=0; i < userData.length; i++){
            if(this.form_login.email == userData[i].email) {
                emailValid = true
+               loginID = this.form_login.email
                userDataIndex = i
            }
         }
@@ -152,9 +154,11 @@ export default {
         if(emailValid){
             if(this.form_login.pwd == userData[userDataIndex].pwd){
                 this.error = ''
-                // this.$store.loginOrNot = true
-                // console.log(this.$store.loginOrNot)
+                this.$store.commit('UPDATEAUTH', true)
+                this.$store.commit('UPDATELOGINID', loginID)
                 alert("登入成功!")
+                let path = `/companylist`
+                this.$router.push(path)
             }else{
                 this.error = '密碼錯誤'
             }

@@ -12,7 +12,7 @@
             <div class="row my-4">
                 <div class="col-12 txt-align">
                     <b-button class="enter-btn" variant="light">
-                        <div class="" @click="toRate">查詢分數</div>
+                        <div class="" @click="toCompanyList">查詢分數</div>
                     </b-button>
                 </div>
             </div>
@@ -40,7 +40,7 @@ export default {
     }
   },
   methods: {
-      toRate(){
+      toCompanyList(){
          this.$router.push({ path: 'companylist' })
       },
   }

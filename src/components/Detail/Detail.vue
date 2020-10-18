@@ -55,38 +55,40 @@
             </div>
             <div class="col"></div>
             </div>
+            <div v-if="loginID == 'adminadmin@gmail.com' || loginID == 'company368@gmail.com'">
+              <div class="row">
+                <div class="col-12">
+                    <div class="detail-title">各大評鑑指標分數與排名</div>
+                    <div class="detail-subtitle">點選可查看各大指標細項分數</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col"></div> 
+                <div class="col-3">
+                  <Behavior :detail="be_detail" :score="be_score"></Behavior>
+                </div>
+                <div class="col-3">
+                    <History :detail="hi_detail" :score="hi_score"></History>
+                </div>
+                <div class="col-3">
+                    <Vehicle :detail="ve_detail" :score="ve_score"></Vehicle>
+                </div>
+                <div class="col"></div>
+            </div>
             <div class="row">
-            <div class="col-12">
-                <div class="detail-title">各大評鑑指標分數與排名</div>
-                <div class="detail-subtitle">點選可查看各大指標細項分數</div>
+              <div class="col"></div>
+              <div class="col-3">
+                  <Labor :detail="la_detail" :score="la_score"></Labor>
+              </div>
+              <div class="col-3">
+                  <Sustain :detail="su_detail" :score="su_score"></Sustain>
+              </div>
+              <div class="col-3">
+                  <Manage :detail="ma_detail" :score="ma_score"></Manage>
+              </div>
+              <div class="col"></div>
             </div>
-            </div>
-            <div class="row">
-            <div class="col"></div>
-            <div class="col-3">
-                <Behavior :detail="be_detail" :score="be_score"></Behavior>
-            </div>
-            <div class="col-3">
-                <History :detail="hi_detail" :score="hi_score"></History>
-            </div>
-            <div class="col-3">
-                <Vehicle :detail="ve_detail" :score="ve_score"></Vehicle>
-            </div>
-            <div class="col"></div>
-            </div>
-            <div class="row">
-            <div class="col"></div>
-            <div class="col-3">
-                <Labor :detail="la_detail" :score="la_score"></Labor>
-            </div>
-            <div class="col-3">
-                <Sustain :detail="su_detail" :score="su_score"></Sustain>
-            </div>
-            <div class="col-3">
-                <Manage :detail="ma_detail" :score="ma_score"></Manage>
-            </div>
-            <div class="col"></div>
-            </div>
+          </div>  
         </div>
         </div>
     </div>
@@ -192,6 +194,9 @@ export default {
     computed: {
       com_data(){
         return this.$store.state.com_data
+      },
+      loginID(){
+        return this.$store.state.loginID
       },
       select_algo(){
         if(this.xg_or_not){
