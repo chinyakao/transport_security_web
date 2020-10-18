@@ -64,6 +64,9 @@ export default {
     Navbar
   },
   computed:{
+    isAuth(){
+        return this.$store.state.isAuthenticated
+    },
     com_list1(){
       if(this.selected2 == '0'){
         return this.$store.state.com_list1
@@ -122,8 +125,14 @@ export default {
   methods: {
     toDetail(){
         // console.log(this.$route)
-        let path = `/detail`
-        if (this.$route.path !== path) this.$router.push(path)
+        if(this.isAuth){
+          let path = `/detail`
+          if (this.$route.path !== path) this.$router.push(path)
+        }else{
+          let path = `/detail_default`
+          if (this.$route.path !== path) this.$router.push(path)
+        }
+        
         
     }
   }
