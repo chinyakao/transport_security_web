@@ -37,14 +37,14 @@
                 <OScore :score="total_score"></OScore>
             </div>
             <div class="col">
-                <ORate></ORate>
+                <ORate :rate="total_rate" :compareRate="total_compareRate"></ORate>
             </div>
             <div class="col"></div>
             </div>
             <div class="row">
             <div class="col"></div>
             <div class="col">
-                <!-- <OChart /> -->
+                <OChart :rate="total_rate"></OChart>
             </div>
             <div class="col"></div>
             </div>
@@ -89,7 +89,7 @@
 import Navbar from '@/components/Navbar'
 import OScore from './OScore.vue'
 import ORate from './ORate.vue'
-// import OChart from './OChart.vue'
+import OChart from './OChart.vue'
 import Behavior from './Behavior.vue'
 import History from './History.vue'
 import Vehicle from './Vehicle.vue'
@@ -102,7 +102,7 @@ export default {
         Navbar,
         OScore,
         ORate,
-        // OChart,
+        OChart,
         Behavior,
         History,
         Vehicle,
@@ -319,6 +319,20 @@ export default {
         result = result+ this.su_score*this.su_big_weight[this.com_data[1]-1]
         result = result+ this.ma_score*this.ma_big_weight[this.com_data[1]-1]
         return Math.round(result*10)/10
+      },
+      total_rate(){
+        if(this.total_score > 89) return '優'
+        else if (this.total_score > 79) return '甲'
+        else if (this.total_score > 69) return '乙'
+        else if (this.total_score > 59) return '丙'
+        else return '不及格'
+      },
+      total_compareRate(){
+        if(this.total_score > 89) return '前10%'
+        else if (this.total_score > 79) return '前20%'
+        else if (this.total_score > 69) return '前30%'
+        else if (this.total_score > 59) return '前40%'
+        else return '60%以下'
       }
     }
     

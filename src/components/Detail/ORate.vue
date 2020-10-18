@@ -64,12 +64,12 @@
 </template>
 <script>
 export default {
+    props:{
+        rate: String,
+        compareRate: String
+    },
     data(){
         return{
-            score: 81.6,
-            averageScore: 78.1,
-            rate: '甲',
-            compareRate: '前30%',
         }
     }
 }

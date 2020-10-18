@@ -31,9 +31,9 @@ const routes = [
     component: () => import( '../components/CompanyList.vue')
   },
   {
-    path: '/rate',
-    name: 'Rate',
-    component: () => import( '../components/Rate/Rate.vue')
+    path: '/detail',
+    name: 'Detail',
+    component: () => import( '../components/Detail/Detail.vue')
   },
 ]
 

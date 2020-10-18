@@ -9,7 +9,6 @@
           <span class="abs-center-x">
             <b-form-select v-model="selected1" :options="options1" size="sm" class="mr-sm-2"></b-form-select>
             <b-form-select v-model="selected2" :options="options2" size="sm" class="mr-sm-2"></b-form-select>
-            <b-form-select v-model="selected3" :options="options3" size="sm" class="mr-sm-2"></b-form-select>
           </span>
         </b-form>
         
@@ -28,7 +27,7 @@
             <div class="col-4">
               <div v-for="(item, index) in com_list1" :key='index'>
                   <ul>
-                    <li >
+                    <li @click="toDetail">
                       {{ item[0] }}
                     </li>
                   </ul>
@@ -37,7 +36,7 @@
             <div class="col-4">
               <div v-for="(item, index) in com_list2" :key='index'>
                   <ul>
-                    <li >
+                    <li @click="toDetail">
                       {{ item[0] }}
                     </li>
                   </ul>
@@ -46,7 +45,7 @@
             <div class="col-4">
               <div v-for="(item, index) in com_list3" :key='index'>
                   <ul>
-                    <li >
+                    <li @click="toDetail">
                       {{ item[0] }}
                     </li>
                   </ul>
@@ -66,14 +65,38 @@ export default {
   },
   computed:{
     com_list1(){
-      return this.$store.state.com_list1
+      if(this.selected2 == '0'){
+        return this.$store.state.com_list1
+      }else{
+        var result = []
+        this.$store.state.com_list1.forEach(element => {
+          if(element[1] == this.selected2) result.push(element)
+        });
+        return result
+      }
     },
     com_list2(){
-      return this.$store.state.com_list2
+      if(this.selected2 == '0'){
+        return this.$store.state.com_list2
+      }else{
+        var result = []
+        this.$store.state.com_list2.forEach(element => {
+          if(element[1] == this.selected2) result.push(element)
+        });
+        return result
+      }
     },
     com_list3(){
-      return this.$store.state.com_list3
-    }
+      if(this.selected2 == '0'){
+        return this.$store.state.com_list3
+      }else{
+        var result = []
+        this.$store.state.com_list3.forEach(element => {
+          if(element[1] == this.selected2) result.push(element)
+        });
+        return result
+      }
+    },
   },
   data() {
     return {
@@ -81,29 +104,29 @@ export default {
       options1: [
         { value: '2020', text: '2020' },
         { value: '2019', text: '2019' },
-        { value: '2018', text: '2018' },
-        { value: '2017', text: '2017' }
       ],
-      selected2: 'a',
+      selected2: '0',
       options2: [
-        { value: 'a', text: '載物' },
-        { value: 'b', text: '載人' },
+        { value: '0', text: '顯示全部' },
+        { value: '1', text: '汽車貨運業' },
+        { value: '2', text: '汽車貨櫃貨運業' },
+        { value: '3', text: '汽車路線貨運業' },
+        { value: '4', text: '客運業' },
       ],
-      selected3: '1',
-      options3: [
-        { value: '1', text: '汽車貨運業(專辦搬家業務)' },
-        { value: '2', text: '汽車貨運業' },
-        { value: '23', text: '汽車貨運、貨櫃貨運業' },
-        { value: '3', text: '汽車貨櫃貨運業' },
-        { value: '4', text: '汽車路線貨運業' },
-        { value: '24', text: '汽車路線貨運、貨運業' }
-      ],      
+      searchClient: ''      
     }
   },
   mounted(){
     this.$store.dispatch('GETLIST')
   },
-
+  methods: {
+    toDetail(){
+        // console.log(this.$route)
+        let path = `/detail`
+        if (this.$route.path !== path) this.$router.push(path)
+        
+    }
+  }
 }
 </script>
 
@@ -125,6 +148,7 @@ select{
 ul li{
   list-style-type:none !important;
   margin: 0.5rem !important;
+  cursor: pointer;
 }
 .navbar{
   background-color: #34DCA2;

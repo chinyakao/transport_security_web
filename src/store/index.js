@@ -22,7 +22,7 @@ export default new Vuex.Store({
       }
     },
     SETCOMPANYDATA(state, com_data){
-      state.com_data = com_data[1]
+      state.com_data = com_data[7]
     },
   },
   actions: {
