@@ -10,19 +10,23 @@
               <span class="abs-center-x title">{{title}}</span>
 
               <b-navbar-nav class="ml-auto">
-                  <b-button href="http://localhost:8080/#/feedback" variant="light" size="sm">
+                  <b-button v-if="!isAuth" @click="toFeedback" variant="light" size="sm">
                       <font-awesome-icon icon="envelope" />
                       意見回饋
                   </b-button>
-                  <b-button class="recordBtn" href="#" variant="light" size="sm">
-                      <font-awesome-icon icon="pen" />
-                      填寫紀錄
+                  <b-button v-if="!isAuth" @click="toCompanylist" variant="light" size="sm">
+                      <font-awesome-icon icon="search" />
+                      查詢分數
                   </b-button>
-                  <!-- <b-button v-if="loginOrNot" class="recordBtn" href="http://localhost:8080/#/login" variant="light" size="sm">
+                  <b-button v-if="isAuth" @click="toDashboard" class="recordBtn" href="#" variant="light" size="sm">
+                      <font-awesome-icon icon="home" />
+                      回到主頁
+                  </b-button>
+                  <b-button v-if="isAuth" @click="logout" class="recordBtn" href="http://localhost:8080/#/login" variant="light" size="sm">
                       <font-awesome-icon icon="sign-out-alt" />
                       登出
-                  </b-button> -->
-                  <b-button class="recordBtn" @click="toLogin" variant="light" size="sm">
+                  </b-button>
+                  <b-button v-else class="recordBtn" @click="toLogin" variant="light" size="sm">
                       <font-awesome-icon icon="sign-in-alt" />
                       登入
                   </b-button>
@@ -34,7 +38,15 @@
 <script>
 export default {
     props: ['title'],
+    computed: {
+        isAuth(){
+            return this.$store.state.isAuthenticated
+        },
+    },
     methods: {
+        logout(){
+            this.$store.commit('UPDATEAUTH', false)
+        },
         toLogin(){
             let path =`/login`
             if (this.$route.path !== path) this.$router.push(path)
@@ -44,6 +56,18 @@ export default {
         toHome(){
             // console.log(this.$route)
             let path = `/`
+            if (this.$route.path !== path) this.$router.push(path)
+        },
+        toDashboard(){
+            let path = `/dashboard`
+            if (this.$route.path !== path) this.$router.push(path)
+        },
+        toFeedback(){
+            let path = `/feedback`
+            if (this.$route.path !== path) this.$router.push(path)
+        },
+        toCompanylist(){
+            let path = `/companylist`
             if (this.$route.path !== path) this.$router.push(path)
         }
     }

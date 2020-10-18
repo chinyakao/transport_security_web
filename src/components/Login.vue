@@ -106,7 +106,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 export default {
-    components:{
+  components:{
     Navbar
   },
   data() {
@@ -157,7 +157,7 @@ export default {
                 this.$store.commit('UPDATEAUTH', true)
                 this.$store.commit('UPDATELOGINID', loginID)
                 alert("登入成功!")
-                let path = `/companylist`
+                let path = `/dashboard`
                 this.$router.push(path)
             }else{
                 this.error = '密碼錯誤'
@@ -176,6 +176,9 @@ export default {
       }
   },
   computed: {
+      isAuth(){
+        return this.$store.state.isAuthenticated
+      },
       state1() {
         return this.form_login.email.indexOf("@") !== -1 ? true : false
       },
@@ -240,6 +243,13 @@ export default {
       validFeedback4() {
         return this.state === true ? '' : ''
       }
+  }
+  ,
+  mounted(){
+    if(this.isAuth){
+      let path = `/dashboard`
+      if (this.$route.path !== path) this.$router.push(path)
+    }
   }
 }
 </script>

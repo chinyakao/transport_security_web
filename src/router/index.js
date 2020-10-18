@@ -51,6 +51,12 @@ const routes = [
     component: () => import( '../components/Detail_Default/Detail.vue'),
     meta: { requiresAuth: false },
   },
+  {
+    path: '/dashboard',
+    name: 'LoginDashboard',
+    component: () => import( '../components/LoginDashboard.vue'),
+    meta: { requiresAuth: true },
+  },
   // 當 url path 不符合 router 表的時候，預設轉址到 順序一定要最後面
   { path: '/*', redirect: '/' }
 ]
