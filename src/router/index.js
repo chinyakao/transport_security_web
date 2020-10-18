@@ -35,6 +35,11 @@ const routes = [
     name: 'Detail',
     component: () => import( '../components/Detail/Detail.vue')
   },
+  {
+    path: '/detail_default',
+    name: 'Detail_Default',
+    component: () => import( '../components/Detail_Default/Detail.vue')
+  },
 ]
 
 const router = new VueRouter({

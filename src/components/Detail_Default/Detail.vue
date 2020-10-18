@@ -63,12 +63,6 @@ export default {
         OScore,
         ORate,
         OChart,
-        Behavior,
-        History,
-        Vehicle,
-        Labor,
-        Manage,
-        Sustain,
     },
     data(){
         return{

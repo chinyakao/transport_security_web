@@ -98,9 +98,9 @@ import PieChart from './PieChart.js'
                     }
                 ]
             },
-            options: {
-                legend: {display: false}
-            }
+            chartOptions: {
+                hoverBorderWidth: 20
+            },
         }
     },
     mounted () {
