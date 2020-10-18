@@ -10,7 +10,7 @@
                         <div class="main-btn-title">查詢分數</div>
                         <div class="main-btn-subtitle">查詢各運輸公司之安全評量分數</div>
                     </b-button>
-                    <b-button @click="toInputform" class="main-btn" variant="light">
+                    <b-button @click="toInputlist" class="main-btn" variant="light">
                         <font-awesome-icon class="main-btn-icon" icon="pen" />
                         <div class="main-btn-title">輸入訪視分數</div>
                         <div class="main-btn-subtitle">選擇公司並輸入訪視後得到之分數</div>
@@ -47,8 +47,8 @@ export default {
         let path = `/companylist`
         if (this.$route.path !== path) this.$router.push(path)
     },
-    toInputform(){
-        let path = `/`
+    toInputlist(){
+        let path = `/inputlist`
         if (this.$route.path !== path) this.$router.push(path)
     },
     toImportdata(){

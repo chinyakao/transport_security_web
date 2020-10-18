@@ -120,7 +120,7 @@ export default {
 }
 .card-btn{
     /* border-color: #34DCA2; */
-    border-color: #FF5858;
+    border-color: #34DCA2;
     /* margin: 1rem;*/
     width: 16rem;
     border-radius: 1.5rem;
@@ -128,7 +128,7 @@ export default {
 }
 .card-icon{
     font-size: 4rem;
-    color: #FF5858;
+    color: #34DCA2;
     /* color: #34DCA2; */
 }
 .card-title{
@@ -140,7 +140,7 @@ export default {
     font-size: 0.75rem;
 }
 .score-num{
-    color: #FF5858;
+    color: #34DCA2;
     /* color: #34DCA2; */
     font-size: 2.5rem;
 }
