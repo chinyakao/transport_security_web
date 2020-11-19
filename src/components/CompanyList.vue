@@ -15,7 +15,12 @@
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
             <b-nav-form>
-                <b-form-input size="sm" class="mr-sm-2 search-input" placeholder="Search"></b-form-input>
+                <b-form-input 
+                  v-model="keyword"  
+                  size="sm" 
+                  class="mr-sm-2 search-input" 
+                  placeholder="Search">
+                </b-form-input>
             </b-nav-form>
           </b-navbar-nav>
       </b-collapse>
@@ -68,36 +73,81 @@ export default {
         return this.$store.state.isAuthenticated
     },
     com_list1(){
+      var data = this.$store.state.com_list1
       if(this.selected2 == '0'){
-        return this.$store.state.com_list1
+        if(this.keyword != ''){
+          var s_result = []
+          data.forEach(element => {
+            if(element[0].indexOf(this.keyword) > -1) s_result.push(element)
+          });
+          return s_result
+        }
+        return data
       }else{
-        var result = []
-        this.$store.state.com_list1.forEach(element => {
-          if(element[1] == this.selected2) result.push(element)
+        var o_result = []
+        data.forEach(element => {
+          if(element[1] == this.selected2) o_result.push(element)
         });
-        return result
+        if(this.keyword != ''){
+          var so_result = []
+          data.forEach(element => {
+            if(element[0].indexOf(this.keyword) > -1) so_result.push(element)
+          });
+          return so_result
+        }
+        return o_result
       }
     },
     com_list2(){
+      var data = this.$store.state.com_list2
       if(this.selected2 == '0'){
-        return this.$store.state.com_list2
+        if(this.keyword != ''){
+          var s_result = []
+          data.forEach(element => {
+            if(element[0].indexOf(this.keyword) > -1) s_result.push(element)
+          });
+          return s_result
+        }
+        return data
       }else{
-        var result = []
-        this.$store.state.com_list2.forEach(element => {
-          if(element[1] == this.selected2) result.push(element)
+        var o_result = []
+        data.forEach(element => {
+          if(element[1] == this.selected2) o_result.push(element)
         });
-        return result
+        if(this.keyword != ''){
+          var so_result = []
+          data.forEach(element => {
+            if(element[0].indexOf(this.keyword) > -1) so_result.push(element)
+          });
+          return so_result
+        }
+        return o_result
       }
     },
     com_list3(){
+      var data = this.$store.state.com_list3
       if(this.selected2 == '0'){
-        return this.$store.state.com_list3
+        if(this.keyword != ''){
+          var s_result = []
+          data.forEach(element => {
+            if(element[0].indexOf(this.keyword) > -1) s_result.push(element)
+          });
+          return s_result
+        }
+        return data
       }else{
-        var result = []
-        this.$store.state.com_list3.forEach(element => {
-          if(element[1] == this.selected2) result.push(element)
+        var o_result = []
+        data.forEach(element => {
+          if(element[1] == this.selected2) o_result.push(element)
         });
-        return result
+        if(this.keyword != ''){
+          var so_result = []
+          data.forEach(element => {
+            if(element[0].indexOf(this.keyword) > -1) so_result.push(element)
+          });
+          return so_result
+        }
+        return o_result
       }
     },
   },
@@ -116,7 +166,7 @@ export default {
         { value: '3', text: '汽車路線貨運業' },
         { value: '4', text: '客運業' },
       ],
-      searchClient: ''      
+      keyword: '',      
     }
   },
   mounted(){
@@ -132,9 +182,7 @@ export default {
           let path = `/detail_default`
           if (this.$route.path !== path) this.$router.push(path)
         }
-        
-        
-    }
+    },
   }
 }
 </script>
