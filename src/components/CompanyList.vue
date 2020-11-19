@@ -32,11 +32,11 @@
             <div class="col-4">
               <div v-for="(item, index) in com_list1" :key='index'>
                   <b-button variant="outline-light" @click="toDetail(0, index)">
-                    {{ item[0] }}
+                    {{ item }}
                   </b-button>
                   <!-- <ul>
                     <li @click="toDetail">
-                      {{ item[0] }}
+                      {{ item }}
                     </li>
                   </ul> -->
               </div>
@@ -44,14 +44,14 @@
             <div class="col-4">
               <div v-for="(item, index) in com_list2" :key='index'>
                   <b-button variant="outline-light" @click="toDetail(1, index)">
-                    {{ item[0] }}
+                    {{ item }}
                   </b-button>
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list3" :key='index'>
                   <b-button variant="outline-light" @click="toDetail(2, index)">
-                    {{ item[0] }}
+                    {{ item }}
                   </b-button>
               </div>
             </div>
