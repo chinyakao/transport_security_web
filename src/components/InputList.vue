@@ -32,21 +32,21 @@
             <div class="col-4">
               <div v-for="(item, index) in com_list1" :key='index'>
                   <b-button variant="outline-light" @click="toInputform(0, index)">
-                    {{ item }}
+                    {{ item[0] }}
                   </b-button>
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list2" :key='index'>
                   <b-button variant="outline-light" @click="toInputform(1, index)">
-                    {{ item }}
+                    {{ item[0] }}
                   </b-button>
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list3" :key='index'>
                   <b-button variant="outline-light" @click="toInputform(2, index)">
-                    {{ item }}
+                    {{ item[0] }}
                   </b-button>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default {
         });
         if(this.keyword != ''){
           var so_result = []
-          data.forEach(element => {
+          o_result.forEach(element => {
             if(element[0].indexOf(this.keyword) > -1) so_result.push(element)
           });
           return so_result
@@ -107,7 +107,7 @@ export default {
         });
         if(this.keyword != ''){
           var so_result = []
-          data.forEach(element => {
+          o_result.forEach(element => {
             if(element[0].indexOf(this.keyword) > -1) so_result.push(element)
           });
           return so_result
@@ -133,7 +133,7 @@ export default {
         });
         if(this.keyword != ''){
           var so_result = []
-          data.forEach(element => {
+          o_result.forEach(element => {
             if(element[0].indexOf(this.keyword) > -1) so_result.push(element)
           });
           return so_result

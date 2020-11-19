@@ -34,12 +34,15 @@ export default new Vuex.Store({
     //   })
     // },
     SETLIST(state, com_list){
+      state.com_list1 = []
+      state.com_list3 = []
+      state.com_list2 = []
       for(var i = 0; i < com_list.length-1; i++){
-        state.com_list1.push( com_list[i][0] )
+        state.com_list1.push( com_list[i] )
         i++
-        state.com_list2.push( com_list[i][0] )
+        state.com_list2.push( com_list[i] )
         i++
-        state.com_list3.push( com_list[i][0] )
+        state.com_list3.push( com_list[i] )
       }
     },
     SETCOMPANYDATA(state, com_data){

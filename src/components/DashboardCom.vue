@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :title="'政府人員主頁'"></Navbar>
+    <Navbar :title="'從業人員主頁'"></Navbar>
     <div class="sub-content">
         <div class="container">
             <div class="row mt-5">

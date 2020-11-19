@@ -140,7 +140,8 @@ export default {
             this.form.name = this.companyName
             console.log(this.form)
             alert("送出成功")
-            // alert(JSON.stringify(this.form))
+            let path = `/detail`
+            if (this.$route.path !== path) this.$router.push(path)
         }
     }
 

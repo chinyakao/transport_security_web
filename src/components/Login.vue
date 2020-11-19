@@ -160,7 +160,8 @@ export default {
                   let path = `/dashboard-gov`
                   this.$router.push(path)
                 }else{
-                  let path = `/dashboard-com`
+                  this.$store.commit('UPDATECHOOSEINDEX', 7)
+                  let path = `/detail`
                   this.$router.push(path)
                 }
                 
