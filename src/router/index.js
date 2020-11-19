@@ -52,9 +52,15 @@ const routes = [
     meta: { requiresAuth: false },
   },
   {
-    path: '/dashboard',
-    name: 'LoginDashboard',
-    component: () => import( '../components/LoginDashboard.vue'),
+    path: '/dashboard-gov',
+    name: 'DashboardGov',
+    component: () => import( '../components/DashboardGov.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/dashboard-com',
+    name: 'DashboardCom',
+    component: () => import( '../components/DashboardCom.vue'),
     meta: { requiresAuth: true },
   },
   {

@@ -124,9 +124,8 @@ export default {
           pwd: '', 
         },
         validUserData: [
-            {email: 'adminadmin@gmail.com', pwd: 'adminadmin'},
+            {email: 'adminadmin@gmail.com', pwd: '1234567890'},
             {email: 'company368@gmail.com', pwd: '1234567890'},
-            {email: 'company73@gmail.com', pwd: 'testemail'},
         ],
         error: '',
 
@@ -157,8 +156,14 @@ export default {
                 this.$store.commit('UPDATEAUTH', true)
                 this.$store.commit('UPDATELOGINID', loginID)
                 alert("登入成功!")
-                let path = `/dashboard`
-                this.$router.push(path)
+                if(loginID == 'adminadmin@gmail.com'){
+                  let path = `/dashboard-gov`
+                  this.$router.push(path)
+                }else{
+                  let path = `/dashboard-com`
+                  this.$router.push(path)
+                }
+                
             }else{
                 this.error = '密碼錯誤'
             }

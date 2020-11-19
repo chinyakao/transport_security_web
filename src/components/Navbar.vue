@@ -18,7 +18,7 @@
                       <font-awesome-icon icon="search" />
                       查詢分數
                   </b-button>
-                  <b-button v-if="isAuth" @click="toDashboard" class="recordBtn" href="#" variant="light" size="sm">
+                  <b-button v-if="isAuth" @click="toDashboard" class="recordBtn" variant="light" size="sm">
                       <font-awesome-icon icon="home" />
                       回到主頁
                   </b-button>
@@ -42,6 +42,9 @@ export default {
         isAuth(){
             return this.$store.state.isAuthenticated
         },
+        loginID(){
+            return this.$store.state.loginID
+        }
     },
     methods: {
         toLogout(){
@@ -59,12 +62,27 @@ export default {
     //   要定義一下login後的page
         toHome(){
             // console.log(this.$route)
-            let path = `/`
-            if (this.$route.path !== path) this.$router.push(path)
+            if(this.isAuth){
+                if(this.loginID == 'adminadmin@gmail.com'){
+                    let path = `/dashboard-gov`
+                    this.$router.push(path)
+                }else{
+                    let path = `/dashboard-com`
+                    this.$router.push(path)
+                }
+            }else{
+                let path = `/`
+                if (this.$route.path !== path) this.$router.push(path)
+            }
         },
         toDashboard(){
-            let path = `/dashboard`
-            if (this.$route.path !== path) this.$router.push(path)
+            if(this.loginID == 'adminadmin@gmail.com'){
+                let path = `/dashboard-gov`
+                this.$router.push(path)
+            }else{
+                let path = `/dashboard-com`
+                this.$router.push(path)
+            }
         },
         toFeedback(){
             let path = `/feedback`

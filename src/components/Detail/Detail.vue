@@ -55,7 +55,7 @@
             </div>
             <div class="col"></div>
             </div>
-            <div v-if="loginID == 'adminadmin@gmail.com' || loginID == 'company368@gmail.com'">
+            <div v-if="loginID == 'adminadmin@gmail.com' || isCompany">
               <div class="row">
                 <div class="col-12">
                     <div class="detail-title">各大評鑑指標分數與排名</div>
@@ -197,6 +197,13 @@ export default {
       },
       loginID(){
         return this.$store.state.loginID
+      },
+      isCompany(){
+        if(this.loginID && this.com_data[0].indexOf("368") > 0){
+          return true
+        }else{
+          return false
+        }
       },
       select_algo(){
         if(this.xg_or_not){
