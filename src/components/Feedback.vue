@@ -83,6 +83,10 @@ export default {
 </script>
 
 <style scoped>
+.btn{
+    border-radius: 1.5rem;
+    border-color: transparent;
+}
 .navbar{
     background-color: #34DCA2;
 }

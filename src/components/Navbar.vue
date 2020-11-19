@@ -22,7 +22,7 @@
                       <font-awesome-icon icon="home" />
                       回到主頁
                   </b-button>
-                  <b-button v-if="isAuth" @click="logout" class="recordBtn" href="http://localhost:8080/#/login" variant="light" size="sm">
+                  <b-button v-if="isAuth" @click="toLogout" class="recordBtn" variant="light" size="sm">
                       <font-awesome-icon icon="sign-out-alt" />
                       登出
                   </b-button>
@@ -44,8 +44,12 @@ export default {
         },
     },
     methods: {
-        logout(){
+        toLogout(){
+            let path =`/`
+            if (this.$route.path !== path) this.$router.push(path)
             this.$store.commit('UPDATEAUTH', false)
+            this.$store.commit('UPDATELOGINID', '')
+
         },
         toLogin(){
             let path =`/login`
