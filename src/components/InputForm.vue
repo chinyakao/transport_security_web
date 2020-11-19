@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="company-title">{{ companyName}}</div>
+                        <div class="company-title">{{ com_data[0] }}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -104,9 +104,13 @@ export default {
     components:{
         Navbar
     },
+    computed: {
+        com_data(){
+            return this.$store.state.com_data
+        },
+    },
     data(){
         return{
-            companyName: 'Company 1044',
             form: {
                 a:'',
                 b:'',
@@ -127,6 +131,9 @@ export default {
                 name: '',
             },
         }
+    },
+    mounted(){
+      this.$store.dispatch('GETCOMPANYDATA')
     },
     methods:{
         submit(){

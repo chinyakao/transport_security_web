@@ -31,29 +31,23 @@
           <div class="row">
             <div class="col-4">
               <div v-for="(item, index) in com_list1" :key='index'>
-                  <ul>
-                    <li @click="toInputform">
-                      {{ item[0] }}
-                    </li>
-                  </ul>
+                  <b-button variant="outline-light" @click="toInputform(0, index)">
+                    {{ item[0] }}
+                  </b-button>
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list2" :key='index'>
-                  <ul>
-                    <li @click="toInputform">
-                      {{ item[0] }}
-                    </li>
-                  </ul>
+                  <b-button variant="outline-light" @click="toInputform(1, index)">
+                    {{ item[0] }}
+                  </b-button>
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list3" :key='index'>
-                  <ul>
-                    <li @click="toInputform">
-                      {{ item[0] }}
-                    </li>
-                  </ul>
+                  <b-button variant="outline-light" @click="toInputform(2, index)">
+                    {{ item[0] }}
+                  </b-button>
               </div>
             </div>
           </div>  
@@ -170,8 +164,8 @@ export default {
     this.$store.dispatch('GETLIST')
   },
   methods: {
-    toInputform(){
-        // console.log(this.$route)
+    toInputform(adder, index){
+        this.$store.commit('UPDATECHOOSEINDEX', index*3+adder)
         let path = `/inputform`
         if (this.$route.path !== path) this.$router.push(path)
         

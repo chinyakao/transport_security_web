@@ -31,29 +31,28 @@
           <div class="row">
             <div class="col-4">
               <div v-for="(item, index) in com_list1" :key='index'>
-                  <ul>
+                  <b-button variant="outline-light" @click="toDetail(0, index)">
+                    {{ item[0] }}
+                  </b-button>
+                  <!-- <ul>
                     <li @click="toDetail">
                       {{ item[0] }}
                     </li>
-                  </ul>
+                  </ul> -->
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list2" :key='index'>
-                  <ul>
-                    <li @click="toDetail">
-                      {{ item[0] }}
-                    </li>
-                  </ul>
+                  <b-button variant="outline-light" @click="toDetail(1, index)">
+                    {{ item[0] }}
+                  </b-button>
               </div>
             </div>
             <div class="col-4">
               <div v-for="(item, index) in com_list3" :key='index'>
-                  <ul>
-                    <li @click="toDetail">
-                      {{ item[0] }}
-                    </li>
-                  </ul>
+                  <b-button variant="outline-light" @click="toDetail(2, index)">
+                    {{ item[0] }}
+                  </b-button>
               </div>
             </div>
           </div>  
@@ -166,15 +165,16 @@ export default {
         { value: '3', text: '汽車路線貨運業' },
         { value: '4', text: '客運業' },
       ],
-      keyword: '',      
+      keyword: '',   
     }
   },
   mounted(){
     this.$store.dispatch('GETLIST')
   },
   methods: {
-    toDetail(){
-        // console.log(this.$route)
+    toDetail(adder, index){
+        // console.log(index)
+        this.$store.commit('UPDATECHOOSEINDEX', index*3+adder)
         if(this.isAuth){
           let path = `/detail`
           if (this.$route.path !== path) this.$router.push(path)

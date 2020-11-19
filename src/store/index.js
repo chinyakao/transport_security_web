@@ -11,15 +11,20 @@ export default new Vuex.Store({
     com_list2: [],
     com_list3: [],
     com_data: [],
+    chooseIndex: 0,
   },
   mutations: {
     UPDATEAUTH(state, isAuth){
       state.isAuthenticated = isAuth
-      console.log( state.isAuthenticated)
+      // console.log( state.isAuthenticated)
     },
     UPDATELOGINID(state, loginID){
       state.loginID = loginID
-      console.log(state.loginID)
+      // console.log(state.loginID)
+    },
+    UPDATECHOOSEINDEX(state, chooseIndex){
+      state.chooseIndex = chooseIndex
+      // console.log(state.chooseIndex)
     },
     // UPDATEDATA(state, data){
     //   axios.put('/com_org_data.json', data).then(res =>{
@@ -38,7 +43,7 @@ export default new Vuex.Store({
       }
     },
     SETCOMPANYDATA(state, com_data){
-      state.com_data = com_data[4]
+      state.com_data = com_data[state.chooseIndex]
     },
   },
   actions: {
